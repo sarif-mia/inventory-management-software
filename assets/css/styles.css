@@ -1,0 +1,629 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+/* Sidebar */
+#sidebar {
+  background-color: #2c2c2c;
+  width: 60px;
+  height: 100vh;
+  position: fixed;
+  top:56px; /* height of navbar */
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  overflow-y: auto;
+  z-index: 1040; /* Ensure sidebar is above other content */
+}
+#sidebar .nav-link {
+  color: #bbb;
+  padding: 12px 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 0;
+}
+#sidebar .nav-link i {
+  font-size: 1.25rem; /* ensure icons are large enough */
+  color: inherit; /* inherit color from nav-link (changes on hover/active) */
+}
+
+/* Fallback visual when icon glyphs don't load: show a subtle circle so links remain discoverable */
+#sidebar .nav-link.no-glyph::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.06);
+}
+#sidebar .nav-link:hover, #sidebar .nav-link.active {
+  background-color: #444;
+  color: #0d6efd;
+}
+/* Main content */
+#main-content {
+  margin-left: 60px;
+  margin-top: 56px;
+  padding: 20px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+/* Top navbar */
+.navbar-dark {
+  background-color: #2c2c2c;
+  top: 0;
+  z-index: 1030;
+}
+.navbar-brand img {
+  height: 30px;
+}
+/* Tabs */
+.nav-tabs .nav-link {
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.nav-tabs .nav-link.active {
+  color: #0d6efd;
+  border-color: #0d6efd #0d6efd #fff;
+}
+/* Cards */
+.card {
+  border-radius: 0.25rem;
+  box-shadow: none;
+  border: 1px solid #dee2e6;
+}
+.card-header {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background-color: transparent;
+  border-bottom: 1px solid #dee2e6;
+}
+.card-body {
+  padding: 1rem 1rem;
+}
+/* Scrollbar for main content */
+#main-content::-webkit-scrollbar {
+  width: 8px;
+}
+#main-content::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+/* Alert numbers in red */
+.text-alert {
+  color: #dc3545;
+  font-weight: 600;
+}
+/* Small text for timestamps */
+.timestamp {
+  font-size: 0.75rem;
+  color: #6c757d;
+  float: right;
+}
+/* Right arrow icon */
+.arrow-icon {
+  font-size: 1rem;
+  color: #6c757d;
+}
+/* Revenue amount */
+.revenue-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+/* Subtext in revenue card */
+.revenue-subtext {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+.revenue-highlight {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+/* Mobile view header adjustments */
+@media (max-width: 768px) {
+  /* Hide select dropdown, search input group, upload/download/bell buttons, and user name */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > select,
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .input-group,
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(1),
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(2),
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(3),
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .dropdown > a.btn.btn-dark.dropdown-toggle {
+    display: none !important;
+  }
+  /* Keep 6-dot icon, logo, profile image, and dropdown menu visible */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(1),
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > img {
+    display: flex !important;
+    align-items: center;
+  }
+  /* Hide dropdown menu on mobile */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .dropdown > ul.dropdown-menu {
+    display: none !important;
+  }
+  /* Hide user icon image on mobile */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > img {
+    display: none !important;
+  }
+  /* Move dashboard-text to right side */
+  .navbar .navbar-brand {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+  #dashboard-text {
+    order: 2;
+  }
+  /* Hide profile icon in sidebar on mobile */
+  #sidebar .profile-icon {
+    display: none !important;
+  }
+  /* Also hide user icon image on mobile sidebar */
+  @media (max-width: 768px) {
+    #sidebar img[alt="User"] {
+      display: none !important;
+    }
+  }
+}
+
+/* Submenu styles */
+.submenu {
+  position: fixed;
+  top: 90px; /* below top navbar and some padding */
+  left: 60px; /* next to sidebar width */
+  width: 250px;
+  background-color: #1e1e1e;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  padding: 15px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.submenu-section h6 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+.submenu-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.submenu-section ul li {
+  margin-bottom: 6px;
+}
+
+.submenu-section ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.submenu-section ul li a:hover {
+  text-decoration: underline;
+  color: #0d6efd;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/* Desktop view adjustment for #dashboard-text margin */
+@media (min-width: 769px) {
+  #dashboard-text {
+    margin-left: 30px;
+    font-size: medium;
+  }
+}
+
+/* Show profile icon in sidebar on mobile */
+#sidebar .profile-icon {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  background-color: #2c2c2c;
+  z-index: 1100;
+  width: 100%;
+  border-bottom: 1px solid #444;
+}
+
+/* Hide profile icon in sidebar on desktop */
+@media (min-width: 769px) {
+  #sidebar .profile-icon {
+    display: none !important;
+  }
+}
+
+#sidebar .profile-icon img {
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+}
+
+/* Footer */
+
+/* Ensure Bootstrap Icons render even if global font-family changes */
+.bi {
+  font-family: "bootstrap-icons" !important;
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* sales.css - Styles for the Sales page */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+h1, h2, h4, h5 {
+  font-weight: 600;
+  color: #222;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6;
+  margin-bottom: 1.5rem;
+}
+
+.nav-tabs .nav-link {
+  color: #495057;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #0d6efd;
+  background-color: #e9f5ff;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0d6efd;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  background-color: #fff;
+}
+
+.card-body {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #444;
+}
+
+.display-6 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9f5ff;
+}
+
+@media (max-width: 767.98px) {
+  .display-6 {
+    font-size: 1.75rem;
+  }
+  .btn-primary, .btn-outline-primary {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+  .card-body {
+    padding: 1rem 0.5rem;
+  }
+}
+
+/* fulfillment.css - Styles for the Fulfillment page */
+.fulfillment-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+.fulfillment-header {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: #999;
+}
+
+.mt-2 {
+    margin-top: 0.5rem !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.sale-order-flow {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.bi-exclamation-triangle {
+    color: #ffc107;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* inventory.css - Styles for the Inventory page */
+.card-header {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  text-transform: uppercase;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+  padding: 1rem 1.25rem;
+}
+
+.display-6 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.85rem;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+  .display-6 {
+    font-size: 1.2rem;
+  }
+  .card-body {
+    padding: 0.75rem 0.5rem;
+  }
+  .card-header {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .table th,
+  .table td {
+    padding: 0.3rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* payments.css */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h3 {
+  font-weight: 700;
+  color: #343a40;
+  border-bottom: 2px solid #0d6efd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.legend {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+.legend-color.marketplace {
+  background-color: #375a7f;
+}
+
+.legend-color.settlement {
+  background-color: #c9302c;
+}
+
+.legend-color.amazon {
+  background-color: #375a7f;
+}
+
+.legend-color.flipkart {
+  background-color: #c9302c;
+}
+
+.legend-color.snapdeal {
+  background-color: #5cb85c;
+}
+
+/* purchases.css */
+.table thead.table-dark {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.4em 0.7em;
+  border-radius: 0.25rem;
+}
+
+.badge.bg-success {
+  background-color: #198754;
+}
+
+.badge.bg-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.badge.bg-danger {
+  background-color: #dc3545;
+}
+
+/* returns.css */
+.card:hover {
+    /* Removed hover scale effect */
+    transform: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.badge {
+    font-size: 0.9em;
+}
+
+.btn-group-sm > .btn, .btn-sm {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    border-radius: .2rem;
+}
+
+/* Purchases card styles */
+.purchases-card {
+    height: 300px;
+    overflow-y: auto;
+}
