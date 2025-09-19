@@ -15,13 +15,13 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 12px; /* moved icons higher */
   overflow-y: auto;
   z-index: 1040; /* Ensure sidebar is above other content */
 }
 #sidebar .nav-link {
   color: #bbb;
-  padding: 12px 0;
+  padding: 8px 0;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -134,28 +134,20 @@ body, html {
 
 /* Mobile view header adjustments */
 @media (max-width: 768px) {
-  /* Hide select dropdown, search input group, upload/download/bell buttons, and user name */
+  /* Hide select dropdown and the large search input on mobile */
   nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > select,
   nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .input-group,
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(1),
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(2),
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > button:nth-of-type(3),
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .dropdown > a.btn.btn-dark.dropdown-toggle {
+  /* Hide upload/download buttons (use explicit classes) */
+  .upload-btn, .download-btn,
+  /* Hide user image and desktop dropdown on mobile */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > img,
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .dropdown {
     display: none !important;
   }
-  /* Keep 6-dot icon, logo, profile image, and dropdown menu visible */
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(1),
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > img {
+  /* Keep 6-dot icon, logo, and dropdown menu visible */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(1) {
     display: flex !important;
     align-items: center;
-  }
-  /* Hide dropdown menu on mobile */
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > .dropdown > ul.dropdown-menu {
-    display: none !important;
-  }
-  /* Hide user icon image on mobile */
-  nav.navbar > div.d-flex.align-items-center.gap-3:nth-child(2) > img {
-    display: none !important;
   }
   /* Move dashboard-text to right side */
   .navbar .navbar-brand {
@@ -176,6 +168,74 @@ body, html {
       display: none !important;
     }
   }
+
+  /* Hide desktop bell icon */
+  nav.navbar > div.d-flex.align-items-center.gap-3:nth-of-type(5) {
+    display: none !important;
+  }
+  /* Show mobile bell icon */
+  #mobileBellIcon {
+    display: block !important;
+  }
+
+  /* Show mobile user dropdown */
+  #mobileUserDropdown {
+    display: block !important;
+  }
+}
+
+/* Mobile-specific topbar tweaks */
+@media (max-width: 768px) {
+  /* Show our mobile-search-btn and hide the larger search input */
+  nav.navbar .d-flex.align-items-center.gap-3 { 
+    gap: 8px !important; /* reduce overall gap between items on mobile */
+  }
+
+  .mobile-search-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    margin-right: 2px; /* tighter spacing */
+    padding: 0.15rem;
+  }
+
+  /* Make bell button appear transparent on mobile to blend with navbar */
+  .bell-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #fff;
+  }
+
+  /* Slightly enlarge icons for touch */
+  .mobile-search-btn i, .bell-btn i {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-user-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    margin-left: 2px; /* tighter spacing */
+    padding: 0.15rem;
+  }
+  .mobile-user-img {
+    height: 26px;
+    width: 26px;
+    border-radius: 4px;
+  }
 }
 
 /* Submenu styles */
@@ -195,6 +255,38 @@ body, html {
   gap: 15px;
   max-height: 80vh;
   overflow-y: auto;
+}
+
+/* Multi-column layout for submenus */
+.submenu-multicolumn {
+  width: auto; /* dynamic width based on content */
+  min-width: 400px; /* minimum width */
+  max-width: 90vw; /* maximum width relative to viewport */
+  flex-direction: row; /* arrange submenu sections horizontally */
+  flex-wrap: wrap; /* allow wrapping to next row if needed */
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 30px;
+}
+
+/* Settings submenu with exactly 3 columns */
+.submenu-three-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 30px;
+  width: auto;
+  min-width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.submenu-multicolumn .submenu-section {
+  flex: 1 1 150px; /* flexible width for columns */
+  min-width: 150px;
+  max-width: 200px;
 }
 
 .submenu-section h6 {
@@ -626,4 +718,38 @@ h3 {
 .purchases-card {
     height: 300px;
     overflow-y: auto;
+}
+
+/* Custom styles for submenu items to remove blue color */
+#dashboard-submenu .btn-link {
+  color: white;
+  text-decoration: none;
+}
+
+#dashboard-submenu .btn-link:hover {
+  text-decoration: underline;
+  color: #0d6efd;
+}
+
+/* Ensure all links in submenu sections are white by default */
+.submenu-section ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.submenu-section ul li a:hover {
+  text-decoration: underline;
+  color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.875rem; /* Smaller base font size for mobile */
+  }
+}
+/* Custom styles for mobile user menu button */
+#mobileUserMenuButton {
+  background: transparent;
+  border: none;
+  padding: 0;
 }

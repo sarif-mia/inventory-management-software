@@ -1,4 +1,4 @@
-      <div id="tshirt-submenu" class="submenu d-none">
+<div id="tshirt-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>PRODUCTS</h6>
           <ul>

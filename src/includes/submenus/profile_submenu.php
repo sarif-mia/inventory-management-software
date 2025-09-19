@@ -1,4 +1,4 @@
-      <div id="profile-submenu" class="submenu d-none">
+<div id="profile-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>PROFILE</h6>
           <ul>

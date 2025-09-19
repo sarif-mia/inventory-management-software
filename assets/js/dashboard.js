@@ -425,4 +425,17 @@ document.addEventListener('DOMContentLoaded', function () {
             initPaymentsCharts();
         }
     }
+
+    // Add event listeners for submenu items to activate corresponding tabs
+    const submenuButtons = document.querySelectorAll('#dashboard-submenu .btn-link');
+    submenuButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            const targetTabId = this.getAttribute('data-bs-target'); // e.g., #overview
+            const correspondingTabButton = document.querySelector(`#dashboardTabs .nav-link[data-bs-target="${targetTabId}"]`);
+            if (correspondingTabButton) {
+                const tab = new bootstrap.Tab(correspondingTabButton);
+                tab.show();
+            }
+        });
+    });
 });

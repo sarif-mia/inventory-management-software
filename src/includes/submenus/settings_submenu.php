@@ -1,4 +1,4 @@
-      <div id="settings-submenu" class="submenu d-none">
+<div id="settings-submenu" class="submenu d-none submenu-three-columns">
         <div class="submenu-section">
           <h6>CHANNELS</h6>
           <ul>

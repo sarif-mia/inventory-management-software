@@ -1,4 +1,4 @@
-      <div id="purchase-submenu" class="submenu d-none">
+<div id="purchase-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>PURCHASE ORDERS</h6>
           <ul>

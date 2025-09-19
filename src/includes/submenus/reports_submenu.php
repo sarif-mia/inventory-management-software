@@ -1,4 +1,4 @@
-      <div id="reports-submenu" class="submenu d-none">
+<div id="reports-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>REPORTS</h6>
           <ul>

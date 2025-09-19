@@ -1,4 +1,4 @@
-      <div id="tasks-submenu" class="submenu d-none">
+<div id="tasks-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>TASKS</h6>
           <ul>

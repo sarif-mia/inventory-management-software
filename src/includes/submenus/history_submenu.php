@@ -1,4 +1,4 @@
-      <div id="history-submenu" class="submenu d-none">
+<div id="history-submenu" class="submenu d-none submenu-multicolumn">
         <div class="submenu-section">
           <h6>HISTORY</h6>
           <ul>

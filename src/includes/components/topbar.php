@@ -22,14 +22,23 @@
         <i class="bi bi-search"></i>
       </button>
     </div>
-    <button class="btn btn-dark position-relative">
+    <button class="btn btn-dark position-relative upload-btn">
       <i class="bi bi-upload"></i>
     </button>
-    <button class="btn btn-dark position-relative">
+    <button class="btn btn-dark position-relative download-btn">
       <i class="bi bi-download"></i>
     </button>
-    <button class="btn btn-dark position-relative">
+    <!-- Mobile-only search shown left of bell on small screens -->
+    <button class="btn btn-dark position-relative mobile-search-btn d-inline-flex d-md-none" aria-label="Mobile search">
+      <i class="bi bi-search"></i>
+    </button>
+    <!-- Notifications (bell) - style will make background transparent on small screens -->
+    <button class="btn btn-dark position-relative bell-btn" aria-label="Notifications">
       <i class="bi bi-bell"></i>
+    </button>
+    <!-- Mobile-only user icon (shown on small screens) -->
+    <button class="btn btn-dark position-relative mobile-user-btn d-inline-flex d-md-none" aria-label="User">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" class="mobile-user-img" />
     </button>
     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" style="height: 30px; width: 30px; border-radius: 4px;" />
     <div class="dropdown">
