@@ -11,6 +11,8 @@
       <?php include 'src/includes/submenus/fulfillment_submenu.php'; ?>
       <a href="#" class="nav-link order-icon" title="Order"><i class="bi bi-list"></i></a>
       <?php include 'src/includes/submenus/order_submenu.php'; ?>
+    <a href="#" class="nav-link settings-icon" title="Settings"><i class="bi bi-gear"></i></a>
+      <?php include 'src/includes/submenus/settings_submenu.php'; ?>
       <a href="#" class="nav-link purchase-icon" title="Shopping"><i class="bi bi-cart"></i></a>
       <?php include 'src/includes/submenus/purchase_submenu.php'; ?>
   <a href="#" class="nav-link" title="Shipping"><i class="bi bi-box-seam"></i></a>
@@ -21,8 +23,6 @@
   <?php include 'src/includes/submenus/tasks_submenu.php'; ?>
   <a href="#" class="nav-link" title="Analytics"><i class="bi bi-bar-chart"></i></a>
   <?php include 'src/includes/submenus/analytics_submenu.php'; ?>
-    <a href="#" class="nav-link settings-icon" title="Settings"><i class="bi bi-gear"></i></a>
-      <?php include 'src/includes/submenus/settings_submenu.php'; ?>
       <?php include 'src/includes/submenus/tshirt_submenu.php'; ?>
   <a href="#" class="nav-link" title="Reports"><i class="bi bi-layout-text-sidebar"></i></a>
   <?php include 'src/includes/submenus/reports_submenu.php'; ?>
