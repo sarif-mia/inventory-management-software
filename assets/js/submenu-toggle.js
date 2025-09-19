@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function closeAllSubmenus() {
     const open = document.querySelectorAll('.submenu:not(.d-none)');
     open.forEach(s => s.classList.add('d-none'));
+    // hide mobile overlay if present
+    const overlay = document.getElementById('submenu-overlay');
+    if (overlay) overlay.classList.add('d-none');
   }
 
   sidebar.addEventListener('click', function (e) {
@@ -42,15 +45,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const submenu = document.getElementById(submenuId);
     if (!submenu) return;
 
-    // Toggle: if hidden, position next to the clicked icon and show; otherwise hide
+    // Toggle: desktop -> position next to icon; mobile -> open modal-like overlay
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
     if (submenu.classList.contains('d-none')) {
       closeAllSubmenus();
-      const sidebarTop = sidebar.getBoundingClientRect().top || 0;
-      const iconTop = link.getBoundingClientRect().top;
-      submenu.style.top = (iconTop - sidebarTop) + 'px';
-      submenu.classList.remove('d-none');
+      if (isMobile) {
+        // Show overlay and center submenu as a panel
+        let overlay = document.getElementById('submenu-overlay');
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.id = 'submenu-overlay';
+          overlay.className = 'submenu-overlay';
+          document.body.appendChild(overlay);
+        }
+        overlay.classList.remove('d-none');
+        // clone submenu content into a mobile panel container to avoid repositioning issues
+        let panel = document.getElementById('submenu-mobile-panel');
+        if (!panel) {
+          panel = document.createElement('div');
+          panel.id = 'submenu-mobile-panel';
+          panel.className = 'submenu-mobile-panel';
+          document.body.appendChild(panel);
+        }
+        panel.innerHTML = submenu.innerHTML;
+        panel.classList.remove('d-none');
+        // add close handler on overlay
+        overlay.addEventListener('click', function () {
+          panel.classList.add('d-none');
+          overlay.classList.add('d-none');
+        });
+      } else {
+        const sidebarTop = sidebar.getBoundingClientRect().top || 0;
+        const iconTop = link.getBoundingClientRect().top;
+        submenu.style.top = (iconTop - sidebarTop) + 'px';
+        submenu.classList.remove('d-none');
+      }
     } else {
+      // hide both desktop and mobile panels
       submenu.classList.add('d-none');
+      const panel = document.getElementById('submenu-mobile-panel');
+      if (panel) panel.classList.add('d-none');
+      const overlay = document.getElementById('submenu-overlay');
+      if (overlay) overlay.classList.add('d-none');
     }
   });
 

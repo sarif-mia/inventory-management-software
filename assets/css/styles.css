@@ -184,6 +184,96 @@ body, html {
   }
 }
 
+/* Make submenus narrower on mobile and collapse multi-column layouts */
+@media (max-width: 768px) {
+  .submenu {
+    width: 50% !important; /* show half of viewport width */
+    left: 25% !important; /* center horizontally */
+    min-width: 0 !important;
+    max-width: 90vw !important;
+    height: 50vh !important; /* occupy half of viewport height */
+    overflow-y: auto !important;
+    background-color: #111 !important; /* slightly stronger dark background */
+    border-radius: 8px !important;
+  }
+
+  /* Render multi-column submenus as a two-column grid on mobile for better use of space */
+  .submenu-multicolumn, .submenu-three-columns {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* two columns */
+    gap: 12px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    align-items: start !important;
+  }
+}
+
+/* Very small phones: drop to single column to avoid cramped layout */
+@media (max-width: 340px) {
+  .submenu-multicolumn, .submenu-three-columns {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+/* Make submenu sections adapt to grid columns on small screens */
+@media (max-width: 768px) {
+  .submenu-multicolumn .submenu-section,
+  .submenu-three-columns .submenu-section {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 6px 4px !important;
+  }
+  .submenu-section h6 {
+    font-size: 0.82rem;
+  }
+  .submenu-section ul li a {
+    font-size: 0.92rem;
+  }
+}
+
+/* Polished mobile submenu overlay and panel */
+.submenu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 3000;
+  display: block;
+}
+.submenu-overlay.d-none { display: none; }
+
+.submenu-mobile-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  width: 70vw; /* reduced from 85vw for a tighter mobile panel */
+  max-width: 360px; /* lower max so it doesn't look too wide on larger phones */
+  max-height: 75vh;
+  background: #1b1b1b;
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px; /* slightly reduced padding to save horizontal space */
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  z-index: 3100;
+  overflow-y: auto;
+  transition: transform 180ms ease, opacity 180ms ease;
+  opacity: 1;
+}
+.submenu-mobile-panel.d-none { display: none; opacity: 0; transform: translate(-50%, -50%) scale(0.98); }
+
+/* Close button inside panel */
+.submenu-mobile-panel .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: #ddd;
+  font-size: 1.1rem;
+}
+
+
 /* Mobile-specific topbar tweaks */
 @media (max-width: 768px) {
   /* Show our mobile-search-btn and hide the larger search input */
@@ -243,7 +333,7 @@ body, html {
   position: fixed;
   top: 90px; /* below top navbar and some padding */
   left: 60px; /* next to sidebar width */
-  width: 250px;
+  width: 210px; /* reduced from 250px for a tighter desktop presentation */
   background-color: #1e1e1e;
   color: white;
   border-radius: 4px;
@@ -260,7 +350,7 @@ body, html {
 /* Multi-column layout for submenus */
 .submenu-multicolumn {
   width: auto; /* dynamic width based on content */
-  min-width: 400px; /* minimum width */
+  min-width: 320px; /* lowered minimum to allow tighter layouts */
   max-width: 90vw; /* maximum width relative to viewport */
   flex-direction: row; /* arrange submenu sections horizontally */
   flex-wrap: wrap; /* allow wrapping to next row if needed */
@@ -276,7 +366,7 @@ body, html {
   grid-template-columns: repeat(3, minmax(150px, 1fr));
   gap: 30px;
   width: auto;
-  min-width: 600px;
+  min-width: 480px; /* reduced from 600px to avoid overly wide panels */
   max-width: 90vw;
   max-height: 80vh;
   overflow-y: auto;
